@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 @import "tailwindcss";
 
 @font-face {
@@ -8,12 +10,12 @@
 }
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 400;
   background-color: #6e6e6e;
 }
 
 body {
+  font-family: "Inter", sans-serif !important;
+  font-weight: 500;
   background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='1' fill-rule='evenodd'%3E%3Crect x='0' y='0' width='20' height='20'/%3E%3Crect x='20' y='20' width='20' height='20'/%3E%3C/g%3E%3C/svg%3E");
 }
 
@@ -42,10 +44,94 @@ body {
   }
 }
 
-h1 {
+.styled-text {
   font-family: "Aquila";
   text-shadow: 0 0 3px rgba(255, 255, 255, 0.5),
     0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.5);
   color: #ffffff;
   line-height: 1.1;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.movies-carousel {
+  overflow: hidden;
+  padding: 40px 0;
+  white-space: nowrap;
+  position: relative;
+}
+
+.movies-carousel:before,
+.movies-carousel:after {
+  position: absolute;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  content: "";
+}
+
+.movies-carousel:before {
+  left: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0), rgb(0, 0, 0));
+}
+
+.movies-carousel:after {
+  right: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(0, 0, 0));
+}
+
+/* Pausa la animación al hacer hover */
+.movies-carousel:hover .card-slide {
+  animation-play-state: paused;
+}
+
+/* Animación deslizante con tiempo ajustado */
+.card-slide {
+  display: inline-block;
+  animation: 35s slide infinite linear;
+}
+
+.card-slide img {
+  filter: drop-shadow(1px 2px 6px #ffffff);
+  height: 70px;
+  margin: 0 40px;
+}
+
+/* Media query para pantallas medianas (<=768px) */
+@media (max-width: 768px) {
+  .card-slide img {
+    height: 50px; /* Reducir el tamaño de las imágenes */
+    margin: 0 30px; /* Reducir los márgenes entre las imágenes */
+  }
+
+  .movies-carousel {
+    padding: 30px 0; /* Ajustar padding en pantallas medianas */
+  }
+
+  .card-slide {
+    animation: 50s slide infinite linear; /* Reducir la velocidad de la animación */
+  }
+}
+
+/* Media query para pantallas pequeñas (<=480px) */
+@media (max-width: 480px) {
+  .card-slide img {
+    height: 40px; /* Reducir aún más el tamaño de las imágenes */
+    margin: 0 20px; /* Reducir los márgenes */
+  }
+
+  .movies-carousel {
+    padding: 20px 0; /* Ajustar padding en pantallas pequeñas */
+  }
+
+  .card-slide {
+    animation: 60s slide infinite linear; /* Reducir la velocidad aún más */
+  }
 }
