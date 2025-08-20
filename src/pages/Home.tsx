@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import PopularMovies from "../components/PopularMovies";
-// import MoviesCarousel from "../components/MoviesCarousel";
+import MoviesCarousel from "../components/MoviesCarousel";
 import { useMovies } from "../hooks/useMovies";
 import "../index.css";
 
@@ -10,7 +10,7 @@ function Home() {
     <>
       <Navbar />
       <main className="">
-        {/* <MoviesCarousel /> */}
+        <MoviesCarousel movies={movies} />
         <PopularMovies movies={movies} />
       </main>
     </>
