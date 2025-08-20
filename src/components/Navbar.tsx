@@ -13,7 +13,7 @@ function Navbar() {
             href="/popular"
             className="text-gray-300 hover:text-white px-3 py-2"
           >
-            Popular Movies
+            Peliculas Populares
           </a>
         </div>
       </div>

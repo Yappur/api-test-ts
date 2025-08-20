@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import PopularMovies from "../components/PopularMovies";
+// import PopularMovies from "../components/PopularMovies";
 import MoviesCarousel from "../components/MoviesCarousel";
 import { useMovies } from "../hooks/useMovies";
 import "../index.css";
@@ -11,7 +11,7 @@ function Home() {
       <Navbar />
       <main className="">
         <MoviesCarousel movies={movies} />
-        <PopularMovies movies={movies} />
+        {/* <PopularMovies movies={movies} /> */}
       </main>
     </>
   );

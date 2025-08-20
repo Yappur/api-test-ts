@@ -1,13 +1,13 @@
 import {Routes, Route} from "react-router-dom";
 import Home from "../pages/Home";
-import Movie from "../pages/Movie";
+import PopularPage from "../pages/PopularPage";
 
 
 export default function RoutesViews() {
     return (
         <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/movie/:name' element={<Movie />} />
+            <Route path='/popular' element={<PopularPage />} />
         </Routes>
     )
 }
