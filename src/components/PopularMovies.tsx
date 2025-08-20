@@ -1,33 +1,10 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import "../index.css";
+import type { Movie } from "../types/top20Movies.ts";
 
-interface Movies {
-  id: number;
-  title: string;
-  poster_path: string;
-  release_date: number;
+interface Props {
+  movies: Movie[];
 }
 
-function PopularMovies() {
-  const [movies, setMovies] = useState<Movies[]>([]);
-
-  const apiKey = import.meta.env.VITE_TMDB_API_KEY;
-  const popularMovies =
-    "https://api.themoviedb.org/3/movie/popular?api_key=" +
-    apiKey +
-    "&language=es-AR&page=1";
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    axios.get(popularMovies).then((response) => {
-      setMovies(response.data.results);
-      console.log(response.data.results);
-    });
-  };
+function PopularMovies({ movies }: Props) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mt-8 p-6">
       {movies.map((movie, index) => (
