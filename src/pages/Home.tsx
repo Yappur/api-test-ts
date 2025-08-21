@@ -10,7 +10,10 @@ function Home() {
     <>
       <Navbar />
       <main className="">
-        <MoviesCarousel movies={movies} />
+        <div className="mt-6.5">
+          <MoviesCarousel movies={movies} />
+        </div>
+
         {/* <PopularMovies movies={movies} /> */}
       </main>
     </>

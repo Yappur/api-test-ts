@@ -16,8 +16,6 @@
 body {
   font-family: "Inter", sans-serif !important;
   font-weight: 500;
-  height: 100vh;
-
   background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='1' fill-rule='evenodd'%3E%3Crect x='0' y='0' width='20' height='20'/%3E%3Crect x='20' y='20' width='20' height='20'/%3E%3C/g%3E%3C/svg%3E");
 }
 
@@ -55,85 +53,37 @@ body {
 }
 
 @keyframes slide {
-  from {
+  0% {
     transform: translateX(0);
   }
-  to {
-    transform: translateX(-100%);
+  100% {
+    transform: translateX(-50%);
   }
 }
 
-.movies-carousel {
+.animate-scroll-infinite {
+  animation: slide 60s linear infinite;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  padding: 40px 0;
-  white-space: nowrap;
-  position: relative;
 }
 
-.movies-carousel:before,
-.movies-carousel:after {
-  position: absolute;
-  top: 0;
-  width: 200px;
-  height: 100%;
-  content: "";
+.shadows {
+  box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
 }
 
-.movies-carousel:before {
-  left: 0;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0), rgb(0, 0, 0));
-}
-
-.movies-carousel:after {
-  right: 0;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(0, 0, 0));
-}
-
-/* Pausa la animación al hacer hover */
-.movies-carousel:hover .card-slide {
-  animation-play-state: paused;
-}
-
-/* Animación deslizante con tiempo ajustado */
-.card-slide {
-  display: inline-block;
-  animation: 30s slide infinite linear;
-}
-
-.card-slide img {
-  filter: drop-shadow(1px 2px 6px #ffffff);
-  height: auto;
-  margin: 0 40px;
-}
-
-/* Media query para pantallas medianas (<=768px) */
 @media (max-width: 768px) {
-  .card-slide img {
-    height: 50px; /* Reducir el tamaño de las imágenes */
-    margin: 0 30px; /* Reducir los márgenes entre las imágenes */
-  }
-
-  .movies-carousel {
-    padding: 30px 0; /* Ajustar padding en pantallas medianas */
-  }
-
-  .card-slide {
-    animation: 50s slide infinite linear; /* Reducir la velocidad de la animación */
+  .animate-scroll-infinite {
+    animation: scroll-infinite 80s linear infinite;
   }
 }
 
-/* Media query para pantallas pequeñas (<=480px) */
 @media (max-width: 480px) {
-  .card-slide img {
-    height: 40px; /* Reducir aún más el tamaño de las imágenes */
-    margin: 0 20px; /* Reducir los márgenes */
-  }
-
-  .movies-carousel {
-    padding: 20px 0; /* Ajustar padding en pantallas pequeñas */
-  }
-
-  .card-slide {
-    animation: 60s slide infinite linear; /* Reducir la velocidad aún más */
+  .animate-scroll-infinite {
+    animation: scroll-infinite 100s linear infinite;
   }
 }
