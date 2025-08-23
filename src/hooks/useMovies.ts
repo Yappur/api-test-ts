@@ -3,7 +3,7 @@ import axios from "axios";
 import type { Movie } from "../types/top20Movies.ts";
 
 export function useMovies() {
-   const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   const apiKey = import.meta.env.VITE_TMDB_API_KEY;
   const popularMovies =
@@ -22,5 +22,14 @@ export function useMovies() {
     });
   };
 
-  return { movies };
+  const detailsMovie = (id: number) => {
+    return `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=es-AR`;
+  };
+
+  const fetchDetails = async (id: number) => {
+    const response = await axios.get(detailsMovie(id));
+    return response.data;
+  };
+
+  return { movies, fetchDetails };
 }
