@@ -1,4 +1,4 @@
-import type { Movie } from "../types/top20Movies.ts";
+import type { Movie } from "../types/moviesType";
 
 interface Props {
   movies: Movie[];

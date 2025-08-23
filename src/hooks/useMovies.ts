@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import type { Movie } from "../types/top20Movies.ts";
+import type { Movie, MovieDetails } from "../types/moviesType";
 
 export function useMovies() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -22,12 +22,13 @@ export function useMovies() {
     });
   };
 
-  const detailsMovie = (id: number) => {
+  const detailsMovie = (id: number): string => {
     return `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=es-AR`;
   };
 
-  const fetchDetails = async (id: number) => {
-    const response = await axios.get(detailsMovie(id));
+  const fetchDetails = async (id: number): Promise<MovieDetails | null> => {
+    const response = await axios.get<MovieDetails>(detailsMovie(id));
+    console.log("Detalles de película:", response.data);
     return response.data;
   };
 

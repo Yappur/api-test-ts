@@ -1,15 +1,37 @@
 import "../index.css";
-import type { Movie } from "../types/top20Movies.ts";
+import type { Movie, MovieDetails } from "../types/moviesType";
 import { useState } from "react";
 
 interface Props {
   movies: Movie[];
+  fetchDetails: (id: number) => Promise<MovieDetails | null>;
 }
 
-const MoviesCarousel = ({ movies }: Props) => {
+const MoviesCarousel = ({ movies, fetchDetails }: Props) => {
   const [isPaused, setIsPaused] = useState(false);
 
   const duplicatedMovies = [...movies, ...movies];
+  const [loadingDetails, setLoadingDetails] = useState<number | null>(null);
+
+  const handleClick = async (id: number): Promise<void> => {
+    try {
+      setLoadingDetails(id);
+      const details = await fetchDetails(id);
+
+      if (details) {
+        console.log("Detalles obtenidos:", details);
+        // Navegar a la página de detalles pasando el ID
+        // navigate(`/movie/${id}`);
+        console.log("Detalles obtenidos:", details);
+      } else {
+        console.error("No se pudieron obtener los detalles");
+      }
+    } catch (err) {
+      console.error("Error al obtener detalles:", err);
+    } finally {
+      setLoadingDetails(null);
+    }
+  };
 
   return (
     <section>
@@ -51,6 +73,20 @@ const MoviesCarousel = ({ movies }: Props) => {
                       <span className="text-gray-300 text-sm">
                         {new Date(movie.release_date).getFullYear()}
                       </span>
+
+                      <button
+                        onClick={() => handleClick(movie.id)}
+                        disabled={loadingDetails === movie.id}
+                        className={`ml-auto px-3 py-1 rounded-full text-sm font-semibold transition-colors duration-300 ${
+                          loadingDetails === movie.id
+                            ? "bg-gray-600 text-gray-300 cursor-not-allowed"
+                            : "bg-blue-600 hover:bg-blue-700 text-white"
+                        }`}
+                      >
+                        {loadingDetails === movie.id
+                          ? "Cargando..."
+                          : "Ver Detalles"}
+                      </button>
                     </div>
                   </div>
                 </div>
